@@ -12,6 +12,7 @@ dependencies = [
     "torchaudio==2.11.0",
     "torchcodec==0.17.0",
     "huggingface-hub",
+    "nvidia-ml-py",  # GPU memory readings in bench.py
 ]
 
 [tool.uv]

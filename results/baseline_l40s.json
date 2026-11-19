@@ -2,35 +2,227 @@
   "model": "Qwen/Qwen3-4B",
   "input_len": 512,
   "output_len": 256,
+  "iters": 3,
+  "gpu": "NVIDIA L40S",
+  "memory": {
+    "gpu_total_gib": 44.98828125,
+    "used_before_engine_gib": 0.59423828125,
+    "used_after_engine_start_gib": 40.75848388671875,
+    "engine_footprint_gib": 40.16424560546875,
+    "gpu_memory_utilization_setting": 0.9
+  },
+  "kv_cache": {
+    "num_blocks": 3560,
+    "block_size": 64,
+    "capacity_tokens": 227840,
+    "bytes_per_token": 147456,
+    "capacity_gib": 31.2890625
+  },
   "runs": [
     {
       "batch_size": 1,
-      "latency_s": 3.1325624419987435,
-      "output_tok_per_s": 81.72223371121638,
-      "per_request_tok_per_s": 81.72223371121638,
-      "total_tok_per_s": 245.16670113364913
+      "wall_time_s_median": 3.134426948003238,
+      "output_tok_per_s": 81.67362144556688,
+      "total_tok_per_s": 245.02086433670064,
+      "ttft_ms": {
+        "mean": 37.35438133298885,
+        "p50": 36.41139800311066,
+        "p95": 41.579779400490224,
+        "p99": 42.0391910802573,
+        "max": 42.154044000199065
+      },
+      "tpot_ms": {
+        "mean": 12.148996867966881,
+        "p50": 12.14894988236255,
+        "p95": 12.151100074109968,
+        "p99": 12.151291202265295,
+        "max": 12.151338984304125
+      },
+      "e2e_latency_s": {
+        "mean": 3.1353485826645433,
+        "p50": 3.1343936180055607,
+        "p95": 3.1390460500959305,
+        "p99": 3.1394595996150745,
+        "max": 3.1395629869948607
+      },
+      "kv_cache_usage_pct": {
+        "peak": 0.3371733633042995,
+        "mean_while_busy": 0.29486141183081593
+      },
+      "gpu_memory_peak_gib": 40.75848388671875,
+      "num_requests_measured": 3
     },
     {
       "batch_size": 8,
-      "latency_s": 3.6332107189955423,
-      "output_tok_per_s": 563.6887476116997,
-      "per_request_tok_per_s": 70.46109345146246,
-      "total_tok_per_s": 1691.0662428350988
+      "wall_time_s_median": 3.6329135179985315,
+      "output_tok_per_s": 563.7348617999301,
+      "total_tok_per_s": 1691.2045853997904,
+      "ttft_ms": {
+        "mean": 149.10120324505746,
+        "p50": 157.71980949648423,
+        "p95": 193.54315329474048,
+        "p99": 193.54800056054955,
+        "max": 193.54920300247613
+      },
+      "tpot_ms": {
+        "mean": 13.629425110951582,
+        "p50": 13.602987558788657,
+        "p95": 13.929553345857558,
+        "p99": 13.93009331566738,
+        "max": 13.930175517681146
+      },
+      "e2e_latency_s": {
+        "mean": 3.624604606537711,
+        "p50": 3.626148668998212,
+        "p95": 3.633614815102919,
+        "p99": 3.633623897253565,
+        "max": 3.633626134003862
+      },
+      "kv_cache_usage_pct": {
+        "peak": 2.697386906434396,
+        "mean_while_busy": 2.3475312765466634
+      },
+      "gpu_memory_peak_gib": 40.75848388671875,
+      "num_requests_measured": 24
     },
     {
       "batch_size": 32,
-      "latency_s": 5.159560875006719,
-      "output_tok_per_s": 1587.7320179867695,
-      "per_request_tok_per_s": 49.61662556208655,
-      "total_tok_per_s": 4763.196053960309
+      "wall_time_s_median": 5.167627927992726,
+      "output_tok_per_s": 1585.2534497742058,
+      "total_tok_per_s": 4755.760349322618,
+      "ttft_ms": {
+        "mean": 441.85963655324184,
+        "p50": 445.2469075040426,
+        "p95": 749.6222242443764,
+        "p99": 752.7831449035148,
+        "max": 752.7880639972864
+      },
+      "tpot_ms": {
+        "mean": 18.330429270790297,
+        "p50": 18.323809143147823,
+        "p95": 19.349636430378464,
+        "p99": 19.54867404629077,
+        "max": 19.59842482356893
+      },
+      "e2e_latency_s": {
+        "mean": 5.1161191006047675,
+        "p50": 5.118446988504729,
+        "p95": 5.167574037750455,
+        "p99": 5.171744433396816,
+        "max": 5.171762130004936
+      },
+      "kv_cache_usage_pct": {
+        "peak": 10.789547625737573,
+        "mean_while_busy": 9.180922996056696
+      },
+      "gpu_memory_peak_gib": 40.75848388671875,
+      "num_requests_measured": 96
     },
     {
       "batch_size": 128,
-      "latency_s": 11.018832383997506,
-      "output_tok_per_s": 2973.81781100405,
-      "per_request_tok_per_s": 23.23295164846914,
-      "total_tok_per_s": 8921.45343301215
+      "wall_time_s_median": 11.148297413994442,
+      "output_tok_per_s": 2939.2829042097833,
+      "total_tok_per_s": 8817.84871262935,
+      "ttft_ms": {
+        "mean": 1679.2925527947016,
+        "p50": 1593.8970529969083,
+        "p95": 3270.74907270726,
+        "p99": 3389.2000037585967,
+        "max": 3399.183672008803
+      },
+      "tpot_ms": {
+        "mean": 35.84453016976998,
+        "p50": 36.23434468038385,
+        "p95": 39.96825783199336,
+        "p99": 40.26822385937032,
+        "max": 40.35393005098883
+      },
+      "e2e_latency_s": {
+        "mean": 10.819647746086048,
+        "p50": 10.842980929999612,
+        "p95": 11.13383538960552,
+        "p99": 11.148629748358216,
+        "max": 11.160942540009273
+      },
+      "kv_cache_usage_pct": {
+        "peak": 43.15819050295027,
+        "mean_while_busy": 33.532554400424594
+      },
+      "gpu_memory_peak_gib": 40.75848388671875,
+      "num_requests_measured": 384
     }
   ],
-  "prefill_latency_ms": 31.394164994708262
+  "kernel_profile": {
+    "kernel_time_ms": 11145.691703,
+    "kernel_launches": 165090,
+    "memcpy_memset_time_ms": 5.095204,
+    "gpu_busy_ms": 11142.788856933594,
+    "trace_span_ms": 11204.914104003907,
+    "gpu_busy_pct": 99.44555356253812,
+    "top_kernels": [
+      {
+        "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 64, 4, cutlass::bfloat16_t> >, false, false, false, false, true, false, false, false>(flash::Flash_fwd_params)",
+        "time_ms": 4185.857182000008,
+        "calls": 8964,
+        "share_pct": 37.555831378983264
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_32x3_tn",
+        "time_ms": 2060.501025999992,
+        "calls": 9832,
+        "share_pct": 18.486973091543373
+      },
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8::Params)",
+        "time_ms": 1841.2398850000009,
+        "calls": 2685,
+        "share_pct": 16.51974533356605
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_64x128_ldg8_f2f_stages_64x3_tn",
+        "time_ms": 1454.057332999983,
+        "calls": 26172,
+        "share_pct": 13.045913809087375
+      },
+      {
+        "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, true, false, false, false, true, false, false, false>(flash::Flash_fwd_params)",
+        "time_ms": 591.9151400000001,
+        "calls": 1224,
+        "share_pct": 5.310707991686858
+      },
+      {
+        "name": "ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_32x1_tn",
+        "time_ms": 294.26894699999986,
+        "calls": 1188,
+        "share_pct": 2.640203540896379
+      },
+      {
+        "name": "triton_poi_fused_mul_silu_slice_1",
+        "time_ms": 193.85910499998516,
+        "calls": 10404,
+        "share_pct": 1.73931874454957
+      },
+      {
+        "name": "ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_64x3_tn",
+        "time_ms": 61.03679799999999,
+        "calls": 328,
+        "share_pct": 0.5476268286119128
+      },
+      {
+        "name": "triton_red_fused_fused_add_rms_norm_2",
+        "time_ms": 55.095894999989575,
+        "calls": 10404,
+        "share_pct": 0.4943245916730304
+      },
+      {
+        "name": "triton_red_fused_fused_add_rms_norm_0",
+        "time_ms": 53.31303500000054,
+        "calls": 10404,
+        "share_pct": 0.4783286351411522
+      }
+    ],
+    "batch_size": 128,
+    "wall_time_ms_profiled": 11222.374466000474,
+    "kernel_time_per_output_token_ms": 0.3401395173034668
+  }
 }
