@@ -1,0 +1,36 @@
+{
+  "model": "Qwen/Qwen3-4B",
+  "input_len": 512,
+  "output_len": 256,
+  "runs": [
+    {
+      "batch_size": 1,
+      "latency_s": 3.1325624419987435,
+      "output_tok_per_s": 81.72223371121638,
+      "per_request_tok_per_s": 81.72223371121638,
+      "total_tok_per_s": 245.16670113364913
+    },
+    {
+      "batch_size": 8,
+      "latency_s": 3.6332107189955423,
+      "output_tok_per_s": 563.6887476116997,
+      "per_request_tok_per_s": 70.46109345146246,
+      "total_tok_per_s": 1691.0662428350988
+    },
+    {
+      "batch_size": 32,
+      "latency_s": 5.159560875006719,
+      "output_tok_per_s": 1587.7320179867695,
+      "per_request_tok_per_s": 49.61662556208655,
+      "total_tok_per_s": 4763.196053960309
+    },
+    {
+      "batch_size": 128,
+      "latency_s": 11.018832383997506,
+      "output_tok_per_s": 2973.81781100405,
+      "per_request_tok_per_s": 23.23295164846914,
+      "total_tok_per_s": 8921.45343301215
+    }
+  ],
+  "prefill_latency_ms": 31.394164994708262
+}

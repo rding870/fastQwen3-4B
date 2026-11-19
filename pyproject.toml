@@ -1,0 +1,39 @@
+[project]
+name = "fastqwen3-4b"
+version = "0.1.0"
+description = "Fast inference and benchmarking for Qwen3-4B with vLLM"
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "vllm==0.34.0",
+    "torch==2.14.0",
+    "torchvision==0.29.0",
+    # Listed directly only so the index pins in [tool.uv.sources] apply to them.
+    "torchaudio==2.11.0",
+    "torchcodec==0.17.0",
+    "huggingface-hub",
+]
+
+[tool.uv]
+package = false
+
+# Get CUDA 13.2 builds of PyTorch (matches the NVIDIA driver, which supports CUDA 13.2).
+# This replaces the `--torch-backend auto` flag used for the original install.
+# torchaudio has no CUDA 13.2 build for 2.11, and the PyPI one is built for CUDA 13.0,
+# which makes vLLM fail at import ("compiled with different CUDA versions").
+# The CPU build avoids that check; a text-only model never uses torchaudio anyway.
+[tool.uv.sources]
+torch = { index = "pytorch-cu132" }
+torchvision = { index = "pytorch-cu132" }
+torchcodec = { index = "pytorch-cu132" }
+torchaudio = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cu132"
+url = "https://download.pytorch.org/whl/cu132"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
