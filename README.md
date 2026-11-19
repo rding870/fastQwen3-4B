@@ -77,3 +77,23 @@ Raw data: [`results/baseline_l40s.json`](results/baseline_l40s.json), full log i
 - With 128 requests at once, total throughput is 36× higher, but each request's TPOT triples to 36 ms. TTFT p95 jumps to 3.3 s because all 128 prompts (65k tokens) arrive at once and are processed in chunks.
 - At batch 128, attention takes 43% of GPU kernel time. That makes attention, not just the weight matrices, a target for optimization at high concurrency (for example an FP8 KV cache).
 - The KV cache was only 43% full at 128 requests, so there's room for more concurrency or longer contexts.
+
+### Cross-check with `vllm bench serve`
+
+[`bench_serve.sh`](bench_serve.sh) runs vLLM's own serving benchmark against a real HTTP server with the same settings (512 in, 256 out, EOS ignored, 3 requests per concurrency slot). Raw results are in [`results/vllm_bench_serve_l40s/`](results/vllm_bench_serve_l40s/).
+
+| Concurrency | Output tok/s (bench.py / vllm) | TTFT p50 ms | TTFT p95 ms | TPOT p50 ms | E2E p95 s |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 81.7 / 80.6 | 36.4 / 40.4 | 41.6 / 43.2 | 12.15 / 12.29 | 3.14 / 3.18 |
+| 8 | 563.7 / 558.2 | 157.7 / 132.4 | 193.5 / 200.4 | 13.60 / 13.83 | 3.63 / 3.70 |
+| 32 | 1,585.3 / 1,579.5 | 445.2 / 352.7 | 749.6 / 717.9 | 18.32 / 18.80 | 5.17 / 5.49 |
+| 128 | 2,939.3 / 2,934.5 | 1,593.9 / 475.5 | 3,270.7 / 2,887.7 | 36.23 / 41.32 | 11.13 / 13.49 |
+
+Throughput agrees to within about 1.5% at every level. The HTTP server adds about 1–4 ms to each request.
+
+The latency differences at high concurrency come from how requests arrive:
+
+- **`bench.py`** sends all N requests at once, waits for them all to finish, then sends the next batch.
+- **`vllm bench serve`** keeps N requests in flight and starts a new one as soon as one finishes.
+
+With a steady stream of new requests, a newcomer usually starts within a few hundred ms (lower median TTFT). But its prompt processing interrupts everyone else's generation (higher TPOT and p95 latency). Burst numbers fit batch jobs, and the steady-stream numbers are closer to a live service.
